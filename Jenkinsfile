@@ -42,11 +42,10 @@ pipeline {
 
         stage("build image"){
             steps {
-                sh "docker build -t test-app:${env.BUILD_NUMBER} ."
-                sh "docker tag test-app:${env.BUILD_NUMBER} test-app:latest"
-                docker login http://localhost:5000
-                sh "docker push http://localhost:5000/test-app:${env.BUILD_NUMBER}"
-                sh "docker push http://localhost:5000/test-app:latest"
+                sh "docker build -t twchenjia/repo.mine:${env.BUILD_NUMBER} .
+                sh "docker tag twchenjia/repo.mine:${env.BUILD_NUMBER} twchenjia/repo.mine:latest"
+                sh "docker push twchenjia/repo.mine:${env.BUILD_NUMBER}
+                sh "docker push twchenjia/repo.mine:latest
             }
         }
     }
