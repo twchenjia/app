@@ -13,25 +13,9 @@ pipeline {
         }
 
         stage('test') {
-            steps {
-                lock('test') {
-                    script {
-                        def err = null
-                        try {
-                            sh "./gradlew clean test"
-                        } catch(caughtError) {
-                            err = caughtError
-                        }
-                    }
-                }
-                lock('test-coverage') {
-                    jacoco(
-                          execPattern: 'build/jacoco/jacocoTest.exec',
-                          classPattern: 'build/classes/java/main',
-                          sourcePattern: 'src/main/java',
-                    )
-                }
-            }
+            steps{
+                 sh "./gradlew clean test"
+             }
         }
 
         stage('build package') {
