@@ -1,4 +1,4 @@
-FROM localhost:5000/openjdk
+FROM 192.168.99.100:5000/openjdk
 
 COPY ./build/libs/*.jar /myapp/myapp.jar
 WORKDIR /myapp

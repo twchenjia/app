@@ -42,10 +42,10 @@ pipeline {
 
         stage("build image"){
             steps {
-                sh "docker build -t twchenjia/repo.mine:${env.BUILD_NUMBER} ."
-                sh "docker tag twchenjia/repo.mine:${env.BUILD_NUMBER} twchenjia/repo.mine:latest"
-                sh "docker push twchenjia/repo.mine:${env.BUILD_NUMBER}"
-                sh "docker push twchenjia/repo.mine:latest"
+                sh "docker build -t 192.168.99.100:5000/my-app:${env.BUILD_NUMBER} ."
+                sh "docker tag 192.168.99.100:5000/my-app:${env.BUILD_NUMBER} 192.168.99.100:5000/my-app:latest"
+                sh "docker push 192.168.99.100:5000/my-app:${env.BUILD_NUMBER}"
+                sh "docker push 192.168.99.100:5000/my-app:latest"
             }
         }
     }
