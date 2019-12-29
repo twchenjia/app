@@ -45,8 +45,8 @@ pipeline {
                 sh "docker build -t test-app:${env.BUILD_NUMBER} ."
                 sh "docker tag test-app:${env.BUILD_NUMBER} test-app:latest"
                 docker login http://localhost:5000
-                sh "docker push http://192.168.31.27:5000/test-app:${env.BUILD_NUMBER}"
-                sh "docker push http://192.168.31.27:5000/test-app:latest"
+                sh "docker push http://localhost:5000/test-app:${env.BUILD_NUMBER}"
+                sh "docker push http://localhost:5000/test-app:latest"
             }
         }
     }
