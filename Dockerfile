@@ -6,4 +6,4 @@ WORKDIR /myapp
 
 EXPOSE 8080
 
-CMD ["/myapp/run.sh"]
+ENTRYPOINT ["sh", "/myapp/run.sh"]
