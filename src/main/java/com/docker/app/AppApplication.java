@@ -13,9 +13,9 @@ public class AppApplication {
         SpringApplication.run(AppApplication.class, args);
     }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/docker")
     public String say() {
-        return "hello docker";
+        return "docker";
     }
 
     @GetMapping("/index")
