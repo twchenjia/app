@@ -6,4 +6,4 @@ WORKDIR /myapp
 
 EXPOSE 8080
 
-CMD ["/app/run.sh"]
+CMD ["/myapp/run.sh"]

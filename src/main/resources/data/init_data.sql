@@ -1,0 +1,1 @@
+create table user (id bigint not null, name varchar(32));
