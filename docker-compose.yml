@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   my-app:
-    image: 192.168.99.100:5000/my-app:latest
+    image: 192.168.99.100:5000/my-app:13
     networks:
       - default
       - proxy
