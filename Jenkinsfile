@@ -5,12 +5,22 @@ pipeline {
         pollSCM('H/5 8-23 * * 1-5')
     }
 
+    environment {
+        DEPLOY_DATE = ''
+    }
+
+
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
+
+        DEPLOY_DATE = $deployDate
+        echo $DEPLOY_DATE
+        IFS = ","
+        def deployRepositories = $repositories
 
         stage('test') {
             steps {
