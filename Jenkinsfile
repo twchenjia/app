@@ -19,7 +19,9 @@ pipeline {
         }
 
         stage('Done') {
-            echo 'Done pipeline'
+            steps {
+                echo 'Done pipeline'
+            }
         }
 
 //        stage('build package') {
