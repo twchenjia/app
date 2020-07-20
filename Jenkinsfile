@@ -24,7 +24,7 @@ pipeline {
 
         stage('test') {
             steps {
-                echo "Will deploy to ${$DEPLOY_DATE}"
+                echo "Will deploy to ${DEPLOY_DATE}"
                 sh "./gradlew clean test"
             }
         }
