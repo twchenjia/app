@@ -1,25 +1,71 @@
+//import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition
+properties
 node {
-
-    properties(
-            [parameters([string(defaultValue: 'Master', name: 'BRANCH'),
-                         string(defaultValue: '200727', name: 'DEPLOY_DATE')])]
-    )
 
     stage('Checkout') {
         checkout scm
     }
 
-    def coreImageTags = input(
-            id: 'coreImageTags', message: 'Enter a comma separated list of additional tags for the image (0.0.1,some-tagname,etc):?',
-            parameters: [
-                    [$class: 'StringParameterDefinition', defaultValue: 'None', description: 'List of tags', name: 'coreImageTagsList'],
-            ]
-    )
+//    def multiSelect = new ExtendedChoiceParameterDefinition("name",
+//            "PT_MULTI_SELECT",
+//            "blue,green,yellow,blue",
+//            "project name",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "blue,green,yellow,blue",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            "",
+//            false,
+//            false,
+//            3,
+//            "multiselect",
+//            ",")
+//
+//    def userInput = input id: 'customID', message: 'Let\'s promote?', ok: 'Release!', parameters: [multiSelect]
 
-    echo("Image tags: " + coreImageTags)
 
-//    def deployDate = ${ DEPLOY_DATE }
-//    def repository = $ {}
+//    echo "Hello: " + userInput
+
+//    stage('Test') {
+//        def reg = input(
+//                message: 'What is the reg value?',
+//                parameters: [
+//                        [$class     : 'ChoiceParameterDefinition',
+//                         choices    : 'Choice 1\nChoice 2\nChoice 3',
+//                         name       : 'input',
+//                         description: 'A select box option']
+//                ])
+//
+//        echo "Reg is ${reg}"
+//    }
+
+
+//    def deployDate = input(
+//            id: 'deploy_date', message: 'Deploy Date',
+//            parameters: [
+//                    [$class: 'StringParameterDefinition', defaultValue: 'NOT_DEPLOY', description: 'Format: YYMMDD, like 190506(means 2019/05/06)', name: 'deploy_date']
+//            ]
+//    )
+
+    echo("Deploy date is " + $DEPLOY_DATE)
+
     def tests = ["aa", "bb"] as String[]
     for (int i = 0; i < tests.length; i++) {
         stage("Test ${tests[i]}") {
