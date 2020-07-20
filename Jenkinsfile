@@ -1,4 +1,5 @@
 def repositories = repository.split(',') as String[]
+def deployDate = DEPLOY_DATE
 node {
     stage('Checkout') {
         checkout scm
@@ -12,8 +13,7 @@ node {
 
 
     stage('test') {
-        echo "${repository}"
-        echo "Will deploy to ${DEPLOY_DATE}"
+        echo "deploy date: ${deployDate}"
         sh "./gradlew clean test"
     }
 
