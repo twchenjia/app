@@ -8,29 +8,33 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-               checkout scm
+                checkout scm
             }
         }
 
         stage('test') {
-            steps{
-                 sh "./gradlew clean test"
-             }
-        }
-
-        stage('build package') {
             steps {
-                sh "./gradlew clean build"
+                sh "./gradlew clean test"
             }
         }
 
-        stage("build image"){
-            steps {
-                sh "docker build -t 192.168.99.100:5000/my-app:${env.BUILD_NUMBER} ."
-                sh "docker tag 192.168.99.100:5000/my-app:${env.BUILD_NUMBER} 192.168.99.100:5000/my-app:latest"
-                sh "docker push 192.168.99.100:5000/my-app:${env.BUILD_NUMBER}"
-                sh "docker push 192.168.99.100:5000/my-app:latest"
-            }
+        stage('Done') {
+            echo 'Done pipeline'
         }
+
+//        stage('build package') {
+//            steps {
+//                sh "./gradlew clean build"
+//            }
+//        }
+//
+//        stage("build image"){
+//            steps {
+//                sh "docker build -t 192.168.99.100:5000/my-app:${env.BUILD_NUMBER} ."
+//                sh "docker tag 192.168.99.100:5000/my-app:${env.BUILD_NUMBER} 192.168.99.100:5000/my-app:latest"
+//                sh "docker push 192.168.99.100:5000/my-app:${env.BUILD_NUMBER}"
+//                sh "docker push 192.168.99.100:5000/my-app:latest"
+//            }
+//        }
     }
 }
