@@ -1,5 +1,4 @@
 //import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition
-properties
 node {
 
     stage('Checkout') {
@@ -63,8 +62,11 @@ node {
 //                    [$class: 'StringParameterDefinition', defaultValue: 'NOT_DEPLOY', description: 'Format: YYMMDD, like 190506(means 2019/05/06)', name: 'deploy_date']
 //            ]
 //    )
+    stage('ssss') {
+        echo("Deploy date is " + $DEPLOY_DATE)
 
-    echo("Deploy date is " + $DEPLOY_DATE)
+    }
+
 
     def tests = ["aa", "bb"] as String[]
     for (int i = 0; i < tests.length; i++) {
