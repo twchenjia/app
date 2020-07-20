@@ -1,53 +1,45 @@
-pipeline {
-    agent any
+node {
 
-    triggers {
-        pollSCM('H/5 8-23 * * 1-5')
+    properties(
+            [parameters([string(defaultValue: 'Master', name: 'BRANCH'),
+                         string(defaultValue: '200727', name: 'DEPLOY_DATE')])]
+    )
+
+    stage('Checkout') {
+        checkout scm
     }
 
-    environment {
-        DEPLOY_DATE = ''
-    }
+    def coreImageTags = input(
+            id: 'coreImageTags', message: 'Enter a comma separated list of additional tags for the image (0.0.1,some-tagname,etc):?',
+            parameters: [
+                    [$class: 'StringParameterDefinition', defaultValue: 'None', description: 'List of tags', name: 'coreImageTagsList'],
+            ]
+    )
 
+    echo("Image tags: " + coreImageTags)
 
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
+//    def deployDate = ${ DEPLOY_DATE }
+//    def repository = $ {}
+    def tests = ["aa", "bb"] as String[]
+    for (int i = 0; i < tests.length; i++) {
+        stage("Test ${tests[i]}") {
+            echo "tt"
         }
+    }
+
 
 //        DEPLOY_DATE = $deployDate
 //        echo $DEPLOY_DATE
 //        IFS = ","
 //        def deployRepositories = $repositories
 
-        stage('test') {
-            steps {
-                echo "Will deploy to ${DEPLOY_DATE}"
-                sh "./gradlew clean test"
-            }
-        }
-
-        stage('Done') {
-            steps {
-                echo 'Done pipeline'
-            }
-        }
-
-//        stage('build package') {
-//            steps {
-//                sh "./gradlew clean build"
-//            }
-//        }
-//
-//        stage("build image"){
-//            steps {
-//                sh "docker build -t 192.168.99.100:5000/my-app:${env.BUILD_NUMBER} ."
-//                sh "docker tag 192.168.99.100:5000/my-app:${env.BUILD_NUMBER} 192.168.99.100:5000/my-app:latest"
-//                sh "docker push 192.168.99.100:5000/my-app:${env.BUILD_NUMBER}"
-//                sh "docker push 192.168.99.100:5000/my-app:latest"
-//            }
-//        }
+    stage('test') {
+        echo "Will deploy to ${DEPLOY_DATE}"
+        sh "./gradlew clean test"
     }
+
+    stage('Done') {
+        echo 'Done pipeline'
+    }
+
 }
