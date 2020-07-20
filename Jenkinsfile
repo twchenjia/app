@@ -1,4 +1,6 @@
 //import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition
+def repositories = repository
+printf repositories
 node {
 
     stage('Checkout') {
@@ -62,11 +64,9 @@ node {
 //                    [$class: 'StringParameterDefinition', defaultValue: 'NOT_DEPLOY', description: 'Format: YYMMDD, like 190506(means 2019/05/06)', name: 'deploy_date']
 //            ]
 //    )
-    stage('ssss') {
-        echo("Deploy date is " + $DEPLOY_DATE)
 
-    }
 
+//    echo "${repository}"
 
     def tests = ["aa", "bb"] as String[]
     for (int i = 0; i < tests.length; i++) {
@@ -82,6 +82,7 @@ node {
 //        def deployRepositories = $repositories
 
     stage('test') {
+        echo "${repository}"
         echo "Will deploy to ${DEPLOY_DATE}"
         sh "./gradlew clean test"
     }
