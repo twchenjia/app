@@ -17,13 +17,14 @@ pipeline {
             }
         }
 
-        DEPLOY_DATE = $deployDate
-        echo $DEPLOY_DATE
-        IFS = ","
-        def deployRepositories = $repositories
+//        DEPLOY_DATE = $deployDate
+//        echo $DEPLOY_DATE
+//        IFS = ","
+//        def deployRepositories = $repositories
 
         stage('test') {
             steps {
+                echo "Will deploy to ${$DEPLOY_DATE}"
                 sh "./gradlew clean test"
             }
         }
